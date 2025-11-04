@@ -81,6 +81,4 @@ O arquivo `mtre3_histórico_5anos.csv` contém dados históricos de um ativo fin
 
 Este projeto ainda não possui uma licença definida. Recomenda-se adicionar uma licença como MIT ou GPL para garantir os direitos de uso e distribuição.
 
----
 
-Se quiser, posso adaptar esse README para português formal, inglês técnico ou incluir badges e links automáticos. Deseja que eu faça isso?
