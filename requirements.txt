@@ -1,0 +1,19 @@
+PACOTE NECESSARIOS DE INTALACAO
+
+jupyter
+pandas
+numpy
+matplotlib
+seaborn
+
+
+✅ Explicação dos pacotes
+jupyter: Para executar e editar notebooks interativos.
+
+pandas: Manipulação e análise de dados tabulares.
+
+numpy: Suporte a operações matemáticas e vetoriais.
+
+matplotlib: Visualizações básicas como gráficos de linha, barras, etc.
+
+seaborn: Visualizações estatísticas mais sofisticadas e estilizadas.
