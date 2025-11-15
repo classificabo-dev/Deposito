@@ -1,68 +1,57 @@
-name: Mobile_tech CI/CD
+# config_teste.yaml
+dataset:
+  file: "Mobile_tech.csv"
+  columns:
+    - brand
+    - model
+    - sentiment
+    - pros
+    - cons
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+visualizacoes:
+  - grafico: "sentimentos_por_marca"
+    tipo: "countplot"
+    x: "brand"
+    hue: "sentiment"
+    palette: "coolwarm"
+    figsize: [8, 5]
+    titulo: "Distribuição de Sentimentos por Marca"
 
-jobs:
-  build:
-    name: Build do projeto Mobile_tech
-    runs-on: ubuntu-latest
+  - grafico: "sentimentos_por_modelo"
+    tipo: "countplot"
+    x: "model"
+    hue: "sentiment"
+    palette: "coolwarm"
+    figsize: [10, 5]
+    titulo: "Distribuição de Sentimentos por Modelo"
+    xticks_rotation: 45
 
-    steps:
-      - name: Checkout do código
-        uses: actions/checkout@v3
+  - grafico: "caracteristicas_positivas"
+    tipo: "barplot"
+    x: "Count"
+    y: "Feature"
+    palette: "Greens_d"
+    figsize: [8, 12]
+    titulo: "Características Positivas Mais Citadas"
 
-      - name: Configurar JDK
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
+  - grafico: "caracteristicas_negativas"
+    tipo: "barplot"
+    x: "Count"
+    y: "Feature"
+    palette: "Reds_d"
+    figsize: [8, 9]
+    titulo: "Características Negativas Mais Citadas"
 
-      - name: Instalar dependências Android
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y android-sdk
+analises:
+  - tipo: "percentual_sentimentos"
+    coluna: "sentiment"
+    metodo: "value_counts"
+    normalize: true
+    multiplicador: 100
+    arredondar: 2
 
-      - name: Build Android
-        run: ./gradlew assembleDebug
+  - tipo: "keywords"
+    colunas: ["pros", "cons"]
+    separadores: [",", ";", "\t"]
+    metodo: "Counter"
 
-      - name: Build iOS (macOS apenas)
-        if: runner.os == 'macOS'
-        run: |
-          xcodebuild -scheme Mobile_tech -sdk iphonesimulator
-
-  test:
-    name: Executar testes
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - name: Checkout do código
-        uses: actions/checkout@v3
-
-      - name: Rodar testes unitários
-        run: ./gradlew test
-
-      - name: Rodar testes instrumentados (Android)
-        run: ./gradlew connectedAndroidTest
-
-  deploy:
-    name: Deploy Mobile_tech
-    runs-on: ubuntu-latest
-    needs: test
-
-    steps:
-      - name: Checkout do código
-        uses: actions/checkout@v3
-
-      - name: Publicar APK
-        run: echo "Simulação de upload do APK para Firebase App Distribution ou Play Store"
-
-      - name: Publicar IPA
-        if: runner.os == 'macOS'
-        run: echo "Simulação de upload do IPA para TestFlight ou App Store"
