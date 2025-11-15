@@ -1,0 +1,47 @@
+# Arquivo de teste para Mobile_tech
+# Nome do arquivo sugerido: mobile_tech_test.yaml
+
+project: Mobile_tech
+
+environment:
+  name: development
+  platform: android
+  version: 1.0.0
+
+tests:
+  - id: 001
+    name: Login básico
+    description: Verifica se o usuário consegue logar com credenciais válidas
+    steps:
+      - abrir_app: true
+      - inserir_usuario: "teste_user"
+      - inserir_senha: "123456"
+      - clicar_login: true
+    expected_result: "Login realizado com sucesso"
+
+  - id: 002
+    name: Cadastro de usuário
+    description: Testa o fluxo de cadastro de novo usuário
+    steps:
+      - abrir_app: true
+      - acessar_cadastro: true
+      - preencher_dados:
+          nome: "Usuário Teste"
+          email: "teste@mobiletech.com"
+          senha: "senha123"
+      - clicar_confirmar: true
+    expected_result: "Usuário cadastrado com sucesso"
+
+  - id: 003
+    name: Consulta de produtos
+    description: Valida se a lista de produtos é exibida corretamente
+    steps:
+      - abrir_app: true
+      - acessar_menu: "Produtos"
+      - carregar_lista: true
+    expected_result: "Lista de produtos exibida"
+
+metadata:
+  author: "Equipe QA"
+  created_at: "2025-11-15"
+  language: "pt-BR"
