@@ -1,0 +1,68 @@
+name: Mobile_tech CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build do projeto Mobile_tech
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+      - name: Configurar JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Instalar dependências Android
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y android-sdk
+
+      - name: Build Android
+        run: ./gradlew assembleDebug
+
+      - name: Build iOS (macOS apenas)
+        if: runner.os == 'macOS'
+        run: |
+          xcodebuild -scheme Mobile_tech -sdk iphonesimulator
+
+  test:
+    name: Executar testes
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+      - name: Rodar testes unitários
+        run: ./gradlew test
+
+      - name: Rodar testes instrumentados (Android)
+        run: ./gradlew connectedAndroidTest
+
+  deploy:
+    name: Deploy Mobile_tech
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+      - name: Publicar APK
+        run: echo "Simulação de upload do APK para Firebase App Distribution ou Play Store"
+
+      - name: Publicar IPA
+        if: runner.os == 'macOS'
+        run: echo "Simulação de upload do IPA para TestFlight ou App Store"
