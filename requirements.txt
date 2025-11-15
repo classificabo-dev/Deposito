@@ -9,7 +9,7 @@ pandas==2.1.1
 numpy==1.26.0
 matplotlib==3.8.0
 jupyter==1.0.0
-seaborn==2.0.0
+seaborn==0.13
 
 
 bash
