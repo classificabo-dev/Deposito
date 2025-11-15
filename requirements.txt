@@ -6,7 +6,7 @@ matplotlib
 seaborn
 
 
-✅ Explicação dos pacotes
+
 jupyter: Para executar e editar notebooks interativos.
 
 pandas: Manipulação e análise de dados tabulares.
@@ -19,7 +19,7 @@ seaborn: Visualizações estatísticas mais sofisticadas e estilizadas.
 
 
 
-BIBLIOTECAS USADAS NO NOTEBOOK:
+
 
 pandas==2.1.1
 numpy==1.26.0
@@ -27,7 +27,7 @@ matplotlib==3.8.0
 jupyter==1.0.0
 
 
-✅Explicação das dependências
+
 pandas: Manipulação de dados tabulares, leitura de CSV, cálculo de estatísticas como mediana.
 
 numpy: Suporte a operações matemáticas e estatísticas.
@@ -39,8 +39,7 @@ jupyter: Ambiente interativo para notebooks.
 
 
 
-🛠️ Como usar
-Crie um ambiente virtual (opcional, mas recomendado):
+
 
 bash
 python -m venv venv
